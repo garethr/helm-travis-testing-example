@@ -4,6 +4,7 @@ sudo: false
 before_install:
   - wget https://kubernetes-helm.storage.googleapis.com/helm-v2.7.2-linux-amd64.tar.gz
   - tar xzvf helm-v2.7.2-linux-amd64.tar.gz
+  - mv linux-amd64/helm helm
   - chmod u+x helm
   - wget https://github.com/garethr/kubeval/releases/download/0.7.0/kubeval-linux-amd64.tar.gz 
   - tar xzvf kubeval-linux-amd64.tar.gz
