@@ -12,15 +12,14 @@ before_install:
   - wget https://github.com/garethr/kubetest/releases/download/0.1.0/kubetest-linux-amd64.tar.gz 
   - tar xzvf kubetest-linux-amd64.tar.gz
   - chmod u+x kubetest
+script:
+  - ./helm template nginx | ./kubeval -v $KUBERNETES_VERSION
+env:
+  - KUBERNETES_VERSION="master"
+  - KUBERNETES_VERSION="1.8.1"
+  - KUBERNETES_VERSION="1.7.5"
 jobs:
   include:
-    - stage: validate
-      script:
-        - ./helm template nginx | ./kubeval -v $KUBERNETES_VERSION
-      env:
-        - KUBERNETES_VERSION="master"
-        - KUBERNETES_VERSION="1.8.1"
-        - KUBERNETES_VERSION="1.7.5"
-    - stage: test
+    - stage: kubetest
       script:
         - ./helm template nginx | ./kubetest --verbose
