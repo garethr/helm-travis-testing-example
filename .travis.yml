@@ -13,5 +13,9 @@ before_install:
   - tar xzvf kubetest-linux-amd64.tar.gz
   - chmod u+x kubetest
 script:
-  - ./helm template nginx | ./kubeval
-  - ./helm template nginx | ./kubetest
+  - ./helm template nginx | ./kubeval -v $KUBERNETES_VERSION
+  - ./helm template nginx | ./kubetest --verbose
+env:
+  - KUBERNETES_VERSION="master"
+  - KUBERNETES_VERSION="1.8.1"
+  - KUBERNETES_VERSION="1.7.5"
